@@ -1,5 +1,8 @@
 var inputField = document.getElementById("input-text");
 var container = document.getElementById("container");
+var editedBio = "";
+var selectedPerson;
+var containerElement;
 
 var famousPeople = [
 	{
@@ -32,35 +35,50 @@ var famousPeople = [
 	}
 ];
 
-var counter = 0;
 
-for (; counter < 3; counter++) {
+for (counter = 0; counter < famousPeople.length; counter++) {
 	
 	// Give each person element a unique identifier
-	container.innerHTML += `<div class="person-container" id="person-${counter}"></div>`;
 
 	// Now containerElement will have elements in it
-	var containerElement = document.getElementsByClassName("person-container");
+	var currentFamousPerson;
+	var peopleString = "";
+	currentFamousPerson = famousPeople[counter];
 
-	for (var i=0; i<containerElement.length; i++) {
-		var peopleString = "";
-
-		peopleString += `<div class="col-sm-6 col-md-4">`;
-		peopleString += `<div class="thumbnail">`;
-		peopleString += `<img src="${famousPeople[counter].image}">`;
-		peopleString += `<div class="caption">`;
-		peopleString += `<h2>${famousPeople[counter].name}</h2>`;
-		peopleString += `<h4>${famousPeople[counter].title}</h4>`;
-		peopleString += `<p>${famousPeople[counter].bio}</p>`;
-		peopleString += `</div></div>`;
-	}
-
+	peopleString += `<div class="thumbnail element-${counter} person-container" id="person-${counter}">`;
+	peopleString += `<img src="${currentFamousPerson.image}" class="child">`;
+	peopleString += `<div class="caption child">`;
+	peopleString += `<h2 class="grandchild">${currentFamousPerson.name}</h2>`;
+	peopleString += `<h4 class="grandchild">${currentFamousPerson.title}</h4>`;
+	peopleString += `<p class="grandchild">${currentFamousPerson.bio}</p>`;
+	peopleString += `<strong class="grandchild">${currentFamousPerson.lifespan.birth} - ${currentFamousPerson.lifespan.death}</strong>`;
+	peopleString += `</div>`;
 	container.innerHTML += peopleString;
 }
 
 
+containerElement = document.getElementsByClassName("person-container");
 
+for (var i=0; i < containerElement.length; i++) {
+	containerElement[i].addEventListener("click", function(event){
+			console.log(event);
+		if (event.target.className === "child") {
+			selectedPerson = event.target.parentNode;
+			selectedPerson.classList.add("dotted-border");
+			inputField.focus();
+		} else if (event.target.className === "grandchild") {
+			selectedPerson = event.target.parentNode.parentNode;
+			selectedPerson.classList.add("dotted-border");
+			inputField.focus();
+		}
+	});
+}
 
+inputField.addEventListener("keypress", function(event){
+	editedBio += event.key;
+	console.log(selectedPerson.lastChild.lastChild.previousSibling);
+	console.log(editedBio);
+});
 
 
 
