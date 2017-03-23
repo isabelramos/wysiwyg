@@ -45,7 +45,7 @@ for (counter = 0; counter < famousPeople.length; counter++) {
 	var peopleString = "";
 	currentFamousPerson = famousPeople[counter];
 
-	peopleString += `<div class="thumbnail element-${counter} person-container" id="person-${counter}">`;
+	peopleString += `<div class="col-sm-6 col-md-4 thumbnail element-${counter} person-container" id="person-${counter}">`;
 	peopleString += `<img src="${currentFamousPerson.image}" class="child">`;
 	peopleString += `<div class="caption child">`;
 	peopleString += `<h2 class="grandchild">${currentFamousPerson.name}</h2>`;
@@ -75,9 +75,10 @@ for (var i=0; i < containerElement.length; i++) {
 }
 
 inputField.addEventListener("keypress", function(event){
+	var dynamicBio = selectedPerson.lastChild.lastChild.previousSibling;
+	dynamicBio.innerHTML = "";
 	editedBio += event.key;
-	console.log(selectedPerson.lastChild.lastChild.previousSibling);
-	console.log(editedBio);
+	dynamicBio.innerHTML += editedBio;
 });
 
 
