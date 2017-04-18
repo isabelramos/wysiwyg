@@ -1,0 +1,21 @@
+.form-control {
+	width: 200px;
+	margin: 15px;
+}
+
+.person-container {
+	width: 31%;
+	margin: 1%;
+}
+
+ .thumbnail:nth-child(2n) {
+	background-color: #fffcdb;
+}
+
+ .thumbnail:nth-child(2n+1) {
+	background-color: #eaf2ff;
+}
+
+.dotted-border {
+	border: 2px dotted lightgray;
+}
